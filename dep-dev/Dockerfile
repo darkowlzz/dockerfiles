@@ -2,9 +2,9 @@
 #
 # docker run -ti --rm \
 #       -v $PWD:/go/src/github.com/golang/dep \
-#       dev-dep
+#       dep-dev
 #
-# Run tests by passing "su dep -c "sh ~/runtest.sh" to the above command. It
+# Run tests by passing `su dep -c "sh ~/runtest.sh"` to the above command. It
 # runs the test commands as user dep.
 
 FROM golang:alpine
