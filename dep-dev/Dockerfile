@@ -1,3 +1,12 @@
+# dep development in container
+#
+# docker run -ti --rm \
+#       -v $PWD:/go/src/github.com/golang/dep \
+#       dev-dep
+#
+# Run tests by passing "su dep -c "sh ~/runtest.sh" to the above command. It
+# runs the test commands as user dep.
+
 FROM golang:alpine
 
 # Create dep test user in abuild group. Make owner of /go, so that it can
@@ -7,8 +16,7 @@ RUN adduser -G abuild -g "dep test user" -s /bin/ash -D dep \
       && chown -R dep:abuild /go/*
 
 # Install all the packages
-RUN apk update && apk add git gcc libc-dev bash mercurial \
-      && go get -v github.com/golang/dep \
+RUN apk update && apk add git gcc libc-dev bash mercurial bzr \
       && go get -v honnef.co/go/tools/cmd/gosimple \
       && go get -v honnef.co/go/tools/cmd/staticcheck
 
@@ -16,4 +24,4 @@ COPY ./runtest.sh /home/dep/runtest.sh
 
 WORKDIR /go/src/github.com/golang/dep
 
-ENTRYPOINT ["sh"]
+CMD ["sh"]
