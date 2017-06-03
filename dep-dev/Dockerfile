@@ -16,7 +16,7 @@ RUN adduser -G abuild -g "dep test user" -s /bin/ash -D dep \
       && chown -R dep:abuild /go/*
 
 # Install all the packages
-RUN apk update && apk add git gcc libc-dev bash mercurial bzr \
+RUN apk update && apk add --no-cache git gcc libc-dev bash mercurial bzr \
       && go get -v honnef.co/go/tools/cmd/gosimple \
       && go get -v honnef.co/go/tools/cmd/staticcheck
 
