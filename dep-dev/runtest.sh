@@ -2,17 +2,13 @@
 
 cd /go/src/github.com/golang/dep
 
-PKGS=$(go list ./... | grep -v /vendor/ | grep -v _testdata/ )
+PKGS=$(go list ./...)
 
 go build -v ./cmd/dep
 
-go vet $PKGS
-
-staticcheck $PKGS
+./hack/lint.bash
 
 ./hack/validate-vendor.bash
-
-gosimple $PKGS
 
 go build ./hack/licenseok
 
