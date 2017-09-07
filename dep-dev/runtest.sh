@@ -12,6 +12,6 @@ go build -v ./cmd/dep
 
 go build ./hack/licenseok
 
-set -e; for pkg in $PKGS; do go test -v $pkg; done
+set -e; for pkg in $PKGS; do go test -race -v $pkg; done
 
 ./hack/validate-vendor.bash
